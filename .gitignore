@@ -1,0 +1,6 @@
+_Boot/
+_CompileInfo/
+.vs/
+*.tpy
+*.bak
+*~

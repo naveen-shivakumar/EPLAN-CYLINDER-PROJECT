@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <GVL Name="GVL" Id="{7c6c8ae7-65b1-4b09-9ec0-36af90fbd884}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+    // ==========================================
+    // MAIN CONTROL CABINET (Schaltschrank)
+    // ==========================================
+    
+    // Inputs (EL1809 - +MP-6K10)
+    bDruckschalter         AT %I* : BOOL; // E0.0 Wartungseinheit Druckschalter[cite: 15, 25]
+    bNotHalt               AT %I* : BOOL; // E0.1 Not-Halt betätigt[cite: 15, 18]
+    
+    // Outputs (EL2809 - +MP-6K20)
+    bEntlueften            AT %Q* : BOOL; // A0.0 Wartungseinheit Entlüften[cite: 15, 25]
+    bLaserEnable           AT %Q* : BOOL; // A0.1 LaserEnable[cite: 15, 18]
+
+    // ==========================================
+    // CW CONTROLLER
+    // ==========================================
+    
+    // Inputs (EL1809 - +LS-7K10)
+    bCW_Eready             AT %I* : BOOL; // E50.0 CW Eready[cite: 17]
+    bCW_Adb_coded          AT %I* : BOOL; // E50.1 CW Adb coded[cite: 17]
+    bCW_MarkInProgress     AT %I* : BOOL; // E50.2 CW MarkInProgress[cite: 17]
+    
+    // Outputs (EL2809 - +LS-7K20)
+    bCW_Ex_GO              AT %Q* : BOOL; // A50.0 CW Ex.GO[cite: 17]
+    bCW_ERR_RESET          AT %Q* : BOOL; // A50.1 CW ERR_RESET[cite: 17]
+    bCW_STOP               AT %Q* : BOOL; // A50.2 CW STOP[cite: 17]
+    bCW_STAT_REQ           AT %Q* : BOOL; // A50.3 CW STAT_REQ[cite: 17]
+
+    // ==========================================
+    // FIELD BOX 1 (EP1018-0001 - +MS-9K1)
+    // ==========================================
+    
+    bZylAuswerferAS        AT %I* : BOOL; // E1050.0 Zylinder Auswerfer AS (Port X1:4)[cite: 20, 30]
+    bZylAuswerferGS        AT %I* : BOOL; // E1050.1 Zylinder Auswerfer GS (Port X2:4)[cite: 20, 30]
+    bZylSpannerAS          AT %I* : BOOL; // E1050.2 Zylinder Spanner AS (Port X3:4)[cite: 20, 31]
+    bZylSpannerGS          AT %I* : BOOL; // E1050.3 Zylinder Spanner GS (Port X4:4)[cite: 20, 31]
+    bZylWeicheAS           AT %I* : BOOL; // E1050.4 Zylinder Weiche AS (Port X5:4)[cite: 20, 32]
+    bZylWeicheGS           AT %I* : BOOL; // E1050.5 Zylinder Weiche GS (Port X6:4)[cite: 20, 32]
+
+    // ==========================================
+    // FIELD BOX 2 (EP1018-0001 - +MS-9K2)
+    // ==========================================
+    
+    bZylEinlaufAS          AT %I* : BOOL; // E1051.0 Zylinder Einlauf AS (Port X1:4)[cite: 20, 27]
+    bZylEinlaufGS          AT %I* : BOOL; // E1051.1 Zylinder Einlauf GS (Port X2:4)[cite: 20, 27]
+    bZylAuslaufAS          AT %I* : BOOL; // E1051.2 Zylinder Auslauf AS (Port X3:4)[cite: 20, 29]
+    bZylAuslaufGS          AT %I* : BOOL; // E1051.3 Zylinder Auslauf GS (Port X4:4)[cite: 20, 29]
+
+    // ==========================================
+    // FIELD BOX 3 (EP1018-0001 - +MS-9K3)
+    // ==========================================
+    
+    bLS_Einlauf            AT %I* : BOOL; // E1052.0 Lichtschranke Einlauf (Port X1:4)[cite: 21, 26]
+    bServoEinlaufRast      AT %I* : BOOL; // E1052.1 Servo Einlauf eingerastet (Port X2:4)[cite: 21, 26]
+    bServoEinlaufAS        AT %I* : BOOL; // E1052.2 Servo Einlauf AS (Port X3:4)[cite: 21, 26]
+    bServoEinlaufGS        AT %I* : BOOL; // E1052.3 Servo Einlauf GS (Port X4:4)[cite: 21, 26]
+    bLS_Auslauf            AT %I* : BOOL; // E1052.4 Lichtschranke Auslauf (Port X5:4)[cite: 21, 28]
+    bServoAuslaufRast      AT %I* : BOOL; // E1052.5 Servo Auslauf eingerastet (Port X6:4)[cite: 21, 28]
+    bServoAuslaufAS        AT %I* : BOOL; // E1052.6 Servo Auslauf AS (Port X7:4)[cite: 21, 28]
+    bServoAuslaufGS        AT %I* : BOOL; // E1052.7 Servo Auslauf GS (Port X8:4)[cite: 21, 28]
+
+    // ==========================================
+    // FIELD BOX 4 (EP2028-0001 - +MS-10K1)
+    // ==========================================
+    
+    bVentilAuswerferAS     AT %Q* : BOOL; // A1050.0 Ventil Auswerfer AS (Port X1:4)[cite: 23, 30]
+    bVentilAuswerferGS     AT %Q* : BOOL; // A1050.1 Ventil Auswerfer GS (Port X2:4)[cite: 23, 30]
+    bVentilSpannerAS       AT %Q* : BOOL; // A1050.2 Ventil Spanner AS (Port X3:4)[cite: 23, 31]
+    bVentilSpannerGS       AT %Q* : BOOL; // A1050.3 Ventil Spanner GS (Port X4:4)[cite: 23, 31]
+    bVentilWeicheAS        AT %Q* : BOOL; // A1050.4 Ventil Weiche AS (Port X5:4)[cite: 23, 32]
+    bVentilWeicheGS        AT %Q* : BOOL; // A1050.5 Ventil Weiche GS (Port X6:4)[cite: 23, 32]
+
+    // ==========================================
+    // FIELD BOX 5 (EP2028-0001 - +MS-10K2)
+    // ==========================================
+    
+    bVentilEinlaufAS       AT %Q* : BOOL; // A1051.0 Ventil Einlauf AS (Port X1:4)[cite: 23, 27]
+    bVentilEinlaufGS       AT %Q* : BOOL; // A1051.1 Ventil Einlauf GS (Port X2:4)[cite: 23, 27]
+    bVentilAuslaufAS       AT %Q* : BOOL; // A1051.2 Ventil Auslauf AS (Port X3:4)[cite: 23, 29]
+    bVentilAuslaufGS       AT %Q* : BOOL; // A1051.3 Ventil Auslauf GS (Port X4:4)[cite: 23, 29]
+    bVentilAusblasenAS     AT %Q* : BOOL; // A1051.4 Ventil Ausblasen AS (Port X5:4)[cite: 23, 33]
+    bVentilAusblasenGS     AT %Q* : BOOL; // A1051.5 Ventil Ausblasen GS (Port X6:4)[cite: 23, 33]
+    bVentilAuswurfBypAS    AT %Q* : BOOL; // A1051.6 Ventil Auswurf Bypass AS (Port X7:4)[cite: 23, 34]
+    bVentilAuswurfBypGS    AT %Q* : BOOL; // A1051.7 Ventil Auswurf Bypass GS (Port X8:4)[cite: 23, 34]
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
